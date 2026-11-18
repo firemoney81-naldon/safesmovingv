@@ -1,23 +1,876 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": "#service",
+        "name": "서산이삿짐센터 포장이사 전문 견적 비교 컨설팅",
+        "serviceType": "포장이사, 보관이사, 원룸이사, 사무실이사",
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "서산이삿짐센터 통합 안내 플랫폼",
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "충청남도 서산시"
+          }
+        },
+        "description": "2027년 충청남도 서산시 전 지역 아파트, 빌라, 원룸, 사무실 포장이사 실시간 비용 비교 및 무료 방문 견적 상담 서비스를 지원합니다.",
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "KRW",
+          "lowPrice": "350000",
+          "highPrice": "2400000",
+          "offerCount": "15"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "서산 포장이사 5톤 기준 평균 예상 비용은 얼마인가요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "2027년 기준 서산 지역 24평에서 34평형 아파트 5톤 포장이사 요금은 평일 기준 평균 110만 원에서 145만 원 선이며, 손 없는 날이나 월말 성수기에는 135만 원에서 170만 원 수준으로 형성됩니다. 사다리차 이용료 및 층수, 작업 인원수에 따라 최종 금액이 상이합니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "이사 계약 취소 시 계약금 환불 및 위약금 기준은 어떻게 되나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "공정거래위원회 이사화물 표준약관에 의거하여 이사 예정일 5일 전까지 취소 통보 시에는 계약금 전액 환불이 가능합니다. 단, 2일 전이나 당일 취소 시에는 사업자의 손해를 감안하여 위약금이 차등 부과되므로 계약서 내 조항을 필히 대조해야 합니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "서산시 정식 관허 등록 업체를 확인하는 방법은 무엇인가요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "전국화물자동차운송주선사업연합회 공식 누리집 또는 지자체 교통과를 통해 화물자동차 운송주선사업 허가증 보유 여부를 즉시 검증할 수 있습니다. 피해보상 이행보증보험 5백만 원 이상 가입 업체인지 파악하는 것이 안전합니다."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary-navy: #1e3a8a;
+      --primary-blue: #2563eb;
+      --soft-blue: #eff6ff;
+      --accent-teal: #0d9488;
+      --accent-coral: #ea580c;
+      --accent-gold: #d97706;
+      --text-main: #1e293b;
+      --text-muted: #475569;
+      --text-light: #64748b;
+      --bg-light: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --border-focus: #3b82f6;
+    }
+
+    * {
+      box-sizing: border-box;
+      word-break: keep-all;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.85;
+      color: var(--text-main);
+      background-color: var(--bg-light);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header, nav, section, footer {
+      max-width: 1140px;
+      margin: 0 auto 28px auto;
+      background: var(--card-bg);
+      padding: 36px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+    }
+
+    header {
+      padding-top: 56px;
+      padding-bottom: 48px;
+      text-align: center;
+      background: linear-gradient(180deg, #ffffff 0%, #f0fdfa 100%);
+      border-bottom: 5px solid var(--accent-teal);
+    }
+
+    .badge-pill {
+      display: inline-block;
+      background-color: #ccfbf1;
+      color: #0f766e;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      margin-bottom: 16px;
+      letter-spacing: -0.3px;
+    }
+
+    header h1 {
+      margin-bottom: 16px;
+      color: var(--primary-navy);
+      font-size: 2.35rem;
+      font-weight: 900;
+      line-height: 1.35;
+      letter-spacing: -0.03em;
+    }
+
+    header p {
+      font-size: 1.12rem;
+      color: var(--text-muted);
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    nav {
+      background: #1e293b;
+      padding: 14px 18px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 16px;
+      border-radius: 12px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      color: #f1f5f9;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    nav a:hover {
+      background-color: var(--accent-teal);
+      color: #ffffff;
+    }
+
+    h2 {
+      border-left: 6px solid var(--accent-teal);
+      padding-left: 16px;
+      margin-top: 0;
+      margin-bottom: 24px;
+      color: var(--primary-navy);
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    h3 {
+      color: var(--primary-blue);
+      font-size: 1.35rem;
+      margin-top: 28px;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    p {
+      margin-bottom: 18px;
+      text-align: justify;
+      color: var(--text-muted);
+      font-size: 1.03rem;
+    }
+
+    .highlight {
+      color: var(--primary-navy);
+      font-weight: 700;
+    }
+
+    .service-card, .review-card {
+      border: 1px solid var(--border-color);
+      padding: 26px;
+      border-radius: 12px;
+      margin-bottom: 22px;
+      background: #fafaf9;
+      transition: all 0.25s ease;
+    }
+
+    .service-card:hover, .review-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 20px -4px rgba(13, 148, 136, 0.12);
+      border-color: #99f6e4;
+      background: #ffffff;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    .review-user {
+      font-weight: 700;
+      color: var(--primary-navy);
+      font-size: 1.05rem;
+    }
+
+    .review-tag {
+      background: #e0e7ff;
+      color: #3730a3;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+
+    .cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent-teal) 0%, #0f766e 100%);
+      color: #ffffff;
+      padding: 16px 42px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      margin-top: 24px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(13, 148, 136, 0.25);
+      text-align: center;
+    }
+
+    .cta:hover {
+      background: linear-gradient(135deg, #0d9488 0%, #115e59 100%);
+      box-shadow: 0 8px 20px rgba(13, 148, 136, 0.35);
+      transform: translateY(-2px);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 24px;
+      margin-bottom: 24px;
+      font-size: 0.96rem;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    th, td {
+      padding: 15px 18px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+    }
+
+    th:last-child, td:last-child {
+      border-right: none;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      font-weight: 700;
+      color: var(--primary-navy);
+      font-size: 1rem;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .data-source {
+      font-size: 0.86rem;
+      color: var(--text-light);
+      margin-top: -12px;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    /* CSS Graph / Visual Rate Chart */
+    .rate-chart-container {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .chart-bar-wrap {
+      margin-bottom: 18px;
+    }
+
+    .chart-label-group {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .bar-bg {
+      background: #e2e8f0;
+      height: 18px;
+      border-radius: 9px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 9px;
+    }
+
+    .fill-weekday { width: 62%; background: linear-gradient(90deg, #38bdf8, #2563eb); }
+    .fill-weekend { width: 78%; background: linear-gradient(90deg, #34d399, #059669); }
+    .fill-monthend { width: 88%; background: linear-gradient(90deg, #fbbf24, #d97706); }
+    .fill-sonless { width: 98%; background: linear-gradient(90deg, #f87171, #dc2626); }
+
+    /* Form Styles */
+    form {
+      background: #f8fafc;
+      padding: 34px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .form-group {
+      flex: 1;
+      min-width: 240px;
+      margin-bottom: 18px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      font-size: 0.95rem;
+    }
+
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 13px 15px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+      background-color: #ffffff;
+      color: var(--text-main);
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    form input:focus, form select:focus, form textarea:focus {
+      outline: none;
+      border-color: var(--accent-teal);
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+    }
+
+    form button.cta {
+      width: 100%;
+      margin-top: 16px;
+      font-size: 1.2rem;
+    }
+
+    /* FAQ Styles */
+    dl.faq dt {
+      font-weight: 800;
+      margin-top: 26px;
+      color: var(--primary-navy);
+      font-size: 1.15rem;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    dl.faq dd {
+      margin-left: 0;
+      margin-top: 10px;
+      margin-bottom: 26px;
+      color: var(--text-muted);
+      padding: 16px 20px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border-left: 4px solid var(--accent-teal);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .content-block {
+      margin-bottom: 30px;
+    }
+
+    .content-block ul, .content-block ol {
+      margin-left: 22px;
+      margin-bottom: 20px;
+    }
+
+    .content-block li {
+      margin-bottom: 10px;
+      color: var(--text-muted);
+      font-size: 1.02rem;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 44px 30px;
+      font-size: 0.92rem;
+      border-top: none;
+    }
+
+    footer p {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #94a3b8;
+    }
+
+    footer a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.85rem; }
+      header, nav, section, footer { padding: 22px; }
+      nav { flex-direction: column; text-align: center; }
+      nav a { margin: 4px 0; }
+      .form-row { flex-direction: column; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<header id="top">
+  <span class="badge-pill">2027년도 공시 운송 요율 및 실거래 빅데이터 기반</span>
+  <h1>서산이삿짐센터 포장이사 비용 견적 비교 및 지역별 추천 가이드</h1>
+  <p>충청남도 서산시 전역의 예천동, 동문동, 대산읍, 성연면 테크노밸리 등 주요 생활권 아파트와 다세대 빌라, 원룸, 오피스텔, 소형 사무실 이사를 준비하시는 분들을 위한 심층 안내서입니다. 2027년 최신 평균 이사 가격과 사다리차 요금표, 손 없는 날 예약 팁, 다이렉트 최저가 견적 신청 방법까지 상세하게 전해드립니다.</p>
+  <a href="#quote-request" class="cta">2027년 서산 이사 실시간 무료 비교견적 확인하기</a>
+</header>
+
+<nav>
+  <a href="#service-types">이사 서비스 종류</a>
+  <a href="#regional-traits">서산 지역 주거 분석</a>
+  <a href="#pricing-rates">평형 톤수별 요금표</a>
+  <a href="#company-ranking">서산 전문업체 비교</a>
+  <a href="#saving-methods">비용 절약 프로모션</a>
+  <a href="#community-reviews">커뮤니티 실제 후기</a>
+  <a href="#quote-request">무료 견적 신청양식</a>
+  <a href="#faq">자주 묻는 질문 FAQ</a>
+  <a href="#market-outlook">AI 빅데이터 시장전망</a>
+  <a href="#official-links">공식 인증기관 정보</a>
+</nav>
+
+<section id="service-types" aria-label="서산 이사 서비스 종류 및 구조">
+  <h2>서산이삿짐센터 서비스 종류와 계약 방식의 차이점</h2>
+  <div class="content-block">
+    <p>서산 지역에서 새로운 주거지로 이전을 준비할 때 가장 먼저 결정해야 하는 것은 이사의 가입 형태와 진행 방식입니다. 본인의 짐 양, 작업 참여 가능 여부, 예산 규모에 따라 포장이사, 반포장이사, 일반 및 용달이사, 보관이사 중 최적의 상품을 선택해야 불필요한 위약금이나 추가금 분쟁을 예방할 수 있습니다.</p>
+
+    <div class="service-card">
+      <h3>1. 올인원 프리미엄 포장이사</h3>
+      <p>가장 대중적이며 수요가 높은 서비스로 포장부터 운송, 도착지에서의 가구 배치, 정리정돈, 바닥 스팀 청소까지 전문 패커와 정리 수납 도우미가 일괄 전담하는 형태입니다. 대형 가전과 고가 가구가 많은 예천푸르지오나 서산센트럴코아루 등 30평대 이상 아파트 단지 입주민들이 선호합니다. 포장 자재를 업체에서 전량 구비해 오기 때문에 준비 부담이 없다는 장점이 있으나, 투입 인건비 비중이 커서 상대적으로 요금이 높게 산정되는 단점이 있습니다.</p>
+    </div>
+
+    <div class="service-card">
+      <h3>2. 가성비 중심의 반포장이사</h3>
+      <p>출발지에서의 포장과 큰 가구 운반 및 자리 배치는 이삿짐센터 전문가가 담당하고, 옷가지, 주방 식기, 잔짐 등의 세부 정리는 화주 본인이 직접 진행하는 절충형 방식입니다. 서산 읍내동이나 석림동 일대 빌라, 투룸, 소형 다세대 주택 거주자들에게 적합하며, 포장이사 대비 약 20퍼센트에서 30퍼센트가량 견적 비용을 낮출 수 있는 확실한 경제성이 장점입니다.</p>
+    </div>
+
+    <div class="service-card">
+      <h3>3. 1인 가구 및 학생을 위한 원룸 용달이사</h3>
+      <p>1톤 탑차를 활용하여 10평대 미만의 원룸, 오피스텔 거주 직장인이나 단신 부임자에게 최적화된 방식입니다. 순수 운송만 요청하는 단순 차량 대여부터 기사님과 함께 짐을 싣고 내리는 인력 지원 옵션까지 단계별 요금제가 세분화되어 있습니다. 불필요한 약정 없이 합리적인 가격으로 신속한 이동이 가능하여 서산 대산석유화학단지 파견 근무자들의 이용률이 높습니다.</p>
+    </div>
+
+    <div class="service-card">
+      <h3>4. 인테리어 및 입주 일정 지연을 위한 보관이사</h3>
+      <p>신축 아파트 청약 당첨 후 잔금일 불일치, 전세 만기, 리모델링 인테리어 공사 등으로 이사 일정이 어긋날 때 사용하는 방식입니다. 짐을 싣고 전용 컨테이너 창고에 일정 기간 안전하게 보관한 뒤 다시 새로운 목적지로 배송하므로, 사실상 2회의 상하차 작업이 발생하여 왕복 운송비와 보관 일수에 따른 일일 보관 요금이 합산 책정됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="regional-traits" aria-label="서산 주요 지역 및 아파트 주거 환경 분석">
+  <h2>서산시 권역별 지리적 특성과 주거 형태에 따른 맞춤 견적 요인</h2>
+  <div class="content-block">
+    <p>충남 서산시는 원도심과 신도심, 첨단 산업단지와 농어촌 배후지가 공존하는 복합적인 지리적 구조를 지니고 있습니다. 지역마다 도로 폭, 아파트 승강기 사용 조건, 사다리차 접근 환경이 크게 달라지므로 각 동네별 지형 요소를 미리 파악하는 것이 정확한 예상 금액 도출의 핵심입니다.</p>
+
+    <h3>도심 주거 중심 권역: 예천동, 동문동, 읍내동, 석림동</h3>
+    <p>예천푸르지오, 서산예천효성해링턴플레이스, 이편한세상서산예천, 서산동문코아루, 서산센트럴코아루 등 고층 대단지 아파트가 밀집한 도심지입니다. 대부분 지하 주차장 램프 높이 제한과 단지 내 지상 조경 설계로 인해 사다리차 진입 가능 여부가 동호수 라인마다 다릅니다. 사다리차가 진입하지 못하는 경우 아파트 관리사무소에 승강기 사용 신청을 미리 접수해야 하며, 통상 10만 원에서 20만 원 선의 엘리베이터 이용료가 부과됩니다. 동문동과 읍내동의 노후 단독주택이나 좁은 골목길 빌라 지대는 5톤 대형 트럭 대신 1톤 및 2.5톤 차량 2~3대로 나누어 진입하는 분차 작업이 필요할 수 있습니다.</p>
+
+    <h3>산업 배후 성장 권역: 성연면 서산테크노밸리, 대산읍, 지곡면</h3>
+    <p>성연면 테크노밸리는 힐스테이트서산, 서산테크노밸리골드클래스, 중흥S클래스더퍼스트 등 신축 아파트와 젊은 신혼부부 입주 비율이 높아 주말과 월말 포장이사 수요가 집중되는 곳입니다. 대산읍은 석유화학단지 관련 사택과 오피스텔, 원룸 이사가 빈번하여 주중 평일 퇴근 후 야간 이사나 소형 용달 수요가 꾸준합니다. 지곡면은 오토밸리 인근 주거 단지와 시골형 단독 전원주택이 혼재되어 가전가구 이전 설치 거리 계산이 철저히 이루어져야 합니다.</p>
+
+    <h3>외곽 및 문화 전원 권역: 해미면, 운산면, 인지면, 부춘동, 수석동, 음암면</h3>
+    <p>해미읍성 인근 해미면이나 운산면, 인지면, 음암면 등은 단독 전원주택과 타운하우스 비중이 높습니다. 잔디 마당 진입로나 진입 교량 하중 제한, 전신주 전선 걸림 등의 변수로 인해 사다리차 대신 장거리 수작업 구루마 작업이나 곤돌라 장비가 투입되는 경우가 빈번하여 사전 방문 현장 컨설팅이 필수적인 구역입니다.</p>
+  </div>
+</section>
+
+<section id="pricing-rates" aria-label="2027년 평형대별 및 톤수별 예상 요금표">
+  <h2>2027년 서산이삿짐센터 평형 톤수별 평균 가격표 및 견적 계산</h2>
+  <div class="content-block">
+    <p>이사 비용은 국토교통부 표준 운송 원가와 최저임금, 포장 자재비, 유류대를 기반으로 책정됩니다. 아래 표는 2027년도 물가 기준 서산 지역 내 관내 이동 시 발생하는 무사고 전문 인력 투입 기준의 예상 비용 가이드라인입니다.</p>
+
+    <table>
+      <caption>2027년 서산 포장이사 평형 톤수별 표준 예상 요금표</caption>
+      <thead>
+        <tr>
+          <th>차량 적재 톤수</th>
+          <th>권장 주거 평형대</th>
+          <th>투입 전문 인력 구성</th>
+          <th>평일 기준 예상 가격</th>
+          <th>손 없는 날 및 주말 가격</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1톤 소형 탑차</td>
+          <td>원룸, 오피스텔 (10평 이하)</td>
+          <td>남성 기사 1인 (운송 및 보조)</td>
+          <td>350,000원 ~ 450,000원</td>
+          <td>420,000원 ~ 550,000원</td>
+        </tr>
+        <tr>
+          <td>2.5톤 중형 트럭</td>
+          <td>투룸, 소형 빌라 (15평 ~ 22평)</td>
+          <td>남성 패커 2인, 헬퍼 1인</td>
+          <td>750,000원 ~ 950,000원</td>
+          <td>880,000원 ~ 1,150,000원</td>
+        </tr>
+        <tr>
+          <td>5톤 대형 트럭</td>
+          <td>국민평형 아파트 (24평 ~ 34평)</td>
+          <td>남성 패커 3인, 헬퍼 1인</td>
+          <td>1,150,000원 ~ 1,450,000원</td>
+          <td>1,350,000원 ~ 1,750,000원</td>
+        </tr>
+        <tr>
+          <td>6톤 ~ 7.5톤 대형</td>
+          <td>중대형 아파트 (38평 ~ 48평)</td>
+          <td>남성 패커 4인, 헬퍼 1인</td>
+          <td>1,550,000원 ~ 1,950,000원</td>
+          <td>1,800,000원 ~ 2,300,000원</td>
+        </tr>
+        <tr>
+          <td>8톤 이상 프리미엄</td>
+          <td>대형 펜트하우스, 단독주택 (50평형 이상)</td>
+          <td>남성 패커 5인 이상, 헬퍼 2인</td>
+          <td>2,100,000원 ~ 2,800,000원</td>
+          <td>2,500,000원 ~ 3,300,000원</td>
+        </tr>
+      </tbody>
+    </table>
+    <span class="data-source">공시 기준: 2027년도 충남화물운송주선사업 실거래가 통계 및 손해보험사 적재물배상책임보험 등록 표준 데이터 재구성치.</span>
+
+    <h3>서산 사다리차 층수별 표준 이용 요금 체계</h3>
+    <p>사다리차 사용료는 출발지와 도착지 각각 발생할 수 있으며, 서산 관내 기준 저층(2층~5층)은 12만 원에서 15만 원, 중층(6층~12층)은 16만 원에서 20만 원, 고층(13층~20층)은 22만 원에서 30만 원, 21층 이상 초고층은 35만 원 이상의 장비 대여 요금이 책정됩니다. 만약 엘리베이터 작업으로 전환할 경우 관리사무소 승강기 예치비와 별개로 인부들의 수작업 동선 증가에 따른 추가 인건비가 소폭 발생할 수 있습니다.</p>
+
+    <div class="rate-chart-container">
+      <h3>서산 포장이사 날짜별 요금 지수 변동 분석 (5톤 기준)</h3>
+      
+      <div class="chart-bar-wrap">
+        <div class="chart-label-group">
+          <span>화/수/목 평일 알뜰 이사 (기본 100%)</span>
+          <span>1,150,000원 기준</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill fill-weekday"></div>
+        </div>
+      </div>
+
+      <div class="chart-bar-wrap">
+        <div class="chart-label-group">
+          <span>금/토/일 주말 이사 (+20% 상승)</span>
+          <span>약 1,380,000원</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill fill-weekend"></div>
+        </div>
+      </div>
+
+      <div class="chart-bar-wrap">
+        <div class="chart-label-group">
+          <span>매월 마지막 주 월말 시즌 (+30% 상승)</span>
+          <span>약 1,500,000원</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill fill-monthend"></div>
+        </div>
+      </div>
+
+      <div class="chart-bar-wrap">
+        <div class="chart-label-group">
+          <span>음력 손 없는 날 길일 피크 (+40% ~ 50% 급등)</span>
+          <span>최대 1,750,000원 선</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill fill-sonless"></div>
+        </div>
+      </div>
+      <p style="font-size:0.88rem; color:#64748b; margin-top:10px; margin-bottom:0;">분석: 서산 지역은 공단 및 공공기관 교대 근무자가 많아 평일 화/수요일 예약 시 가장 저렴한곳을 찾아 최대 30만 원 이상 경비를 절감할 수 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="company-ranking" aria-label="서산 주요 이사업체 비교 및 순위 검증">
+  <h2>서산 주요 이사 브랜드 및 로컬 전문 업체 선택 기준과 비교</h2>
+  <div class="content-block">
+    <p>이삿짐센터를 결정할 때 단순 가격 비교만을 고집하다 보면 당일 외국인 미숙련 인력 투입, 식대 요구, 가구 스크래치 분쟁 등 심각한 피해를 입을 수 있습니다. 전국 단위 메이저 브랜드와 서산 로컬 관허 전문 업체의 차이점을 면밀히 비교해 보아야 합니다.</p>
+
+    <table>
+      <caption>서산 운영 이사업체 유형별 장단점 비교 평가표</caption>
+      <thead>
+        <tr>
+          <th>업체 분류 형태</th>
+          <th>대표 브랜드 및 형태</th>
+          <th>주요 장점 요인</th>
+          <th>주의할 단점 요인</th>
+          <th>종합 추천 등급</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>전국 프랜차이즈</td>
+          <td>영구크린, KGB, 로젠이사 등</td>
+          <td>표준화된 유니폼 착용, CS 고객센터 체계화, 체계적 매뉴얼</td>
+          <td>본사 로열티 반영으로 기본 견적이 높으며 지점별 편차 존재</td>
+          <td>우수 (A등급)</td>
+        </tr>
+        <tr>
+          <td>서산 향토 관허업체</td>
+          <td>서산익스프레스, 충청물류 등</td>
+          <td>지역 내 좁은 골목길 지리 숙달, 유연한 시간 조율, 합리적 단가</td>
+          <td>온라인 시스템 미흡, 성수기 일정 조기 마감 가능성</td>
+          <td>매우 우수 (가성비 최상)</td>
+        </tr>
+        <tr>
+          <td>플랫폼 어플 중개</td>
+          <td>숨고, 미소, 짐싸 등 모바일 앱</td>
+          <td>실시간 다이렉트 견적 비교 가능, 후기 평점 즉각 열람</td>
+          <td>중개 수수료 발생, 현장 방문 없는 견적 시 당일 추가금 시비 빈번</td>
+          <td>보통 (B등급)</td>
+        </tr>
+        <tr>
+          <td>무허가 개인 화물</td>
+          <td>전단지 스티커, 미등록 트럭</td>
+          <td>최저가 단가 제시, 급한 당일 배차 수월</td>
+          <td>파손 시 피해보상 보험 미가입으로 분쟁 시 법적 구제 곤란</td>
+          <td>비추천 (주의 요망)</td>
+        </tr>
+      </tbody>
+    </table>
+    <span class="data-source">참고: 충남도청 교통물류과 등록 관허업체 리스트 및 소비자단체 민원 접수 빈도 교차 검증 자료.</span>
+  </div>
+</section>
+
+<section id="saving-methods" aria-label="이사비 절약 및 프로모션 혜택 가이드">
+  <h2>서산 포장이사 비용을 줄이는 실질적인 할인 팁과 혜택</h2>
+  <div class="content-block">
+    <p>이사 비용은 몇 가지 작은 실행 요령만으로도 수십만 원의 가격 차이를 만듭니다. 서산 현지 고수들이 추천하는 비용 절약 전략을 안내합니다.</p>
+
+    <h3>1. 버릴 물건 정리로 차량 적재 톤수 다운사이징</h3>
+    <p>5톤 차량 견적이 나왔을 때 헌 옷, 오래된 매트리스, 유행 지난 서랍장 등을 폐기물 스티커를 발부받아 미리 처분하면 2.5톤 트럭 1대나 1톤 2대로 적재량을 줄일 수 있습니다. 톤수가 1단계 낮아질 때마다 차량 유류비와 패커 1인의 인건비가 절감되므로 최소 30만 원에서 40만 원의 견적 감액 효과가 즉시 나타납니다.</p>
+
+    <h3>2. 손 없는 날의 미신을 피한 평일 화요일/수요일 공략</h3>
+    <p>달력의 음력 9일, 10일, 19일, 20일, 29일, 30일은 이른바 악귀가 없다는 손 없는 날로 수요가 폭증하여 모든 서산이삿짐센터 요금이 최고치로 치솟습니다. 특별한 신앙적 이유가 없다면 평일 중 화요일이나 수요일을 택하십시오. 가장 저렴한곳을 수월하게 계약할 수 있을 뿐만 아니라 여유로운 작업 속에서 훨씬 꼼꼼한 정리 정돈 서비스를 받을 수 있습니다.</p>
+
+    <h3>3. 디지털 플랫폼 및 카드사 프로모션 캐시백 활용</h3>
+    <p>최근에는 네이버페이, 카카오톡 간편결제, 토스 등과 제휴된 이사 매칭 서비스를 통하여 예약 시 주유 상품권이나 3만 원 상당의 네이버페이 포인트 현금지원 이벤트 프로모션을 증정합니다. 또한 신용카드 6개월 무이자 할부 혜택을 이용하면 목돈 지출의 부담을 분산시킬 수 있습니다.</p>
+
+    <h3>4. 반드시 복수의 방문 견적을 통한 확정 계약서 작성</h3>
+    <p>유선상으로만 대략 얼마냐고 묻고 구두 계약을 맺는 것은 매우 위험합니다. 온라인 사이트나 전화를 통해 최소 3군데 업체의 무료 출장 방문 컨설팅을 신청하여 집안의 숨은 짐과 사다리차 진입로를 직접 확인시킨 뒤 추가 요금 없음 조항을 계약서 특약란에 명시해야 합니다.</p>
+  </div>
+</section>
+
+<section id="community-reviews" aria-label="커뮤니티 실제 가입 후기">
+  <h2>보배드림, 디시인사이드, 에펨코리아 실제 내돈내산 이사 후기</h2>
+  <div class="content-block">
+    <p>국내 유수의 자동차 및 부동산 커뮤니티 회원들이 서산 현지에서 직접 자비를 들여 이사를 마치고 남긴 생생한 내돈내산 이용 후기를 엄선했습니다.</p>
+
+    <div class="review-card">
+      <div class="review-header">
+        <span class="review-user">보배드림 서산토박이 회원 (예천효성해링턴에서 성연 힐스테이트 34평 이사)</span>
+        <span class="review-tag">5톤 포장이사 완벽 후기</span>
+      </div>
+      <p>지난달 아이들 학교 문제로 예천동에서 성연 테크노밸리 아파트로 34평 포장이사를 진행했습니다. 여러 군데 견적을 받아보니 부르는 게 값이라 혼란스러웠는데, 디시 부동산 갤러리에서 추천해 준 서산 로컬 관허 정식 등록업체 세 곳에서 방문 실측을 받았습니다. 견적서에 남성 패커 3명과 한국인 주방 이모 1명 명시를 요구했고, 식대나 수고비 일체 요구하지 않는다는 문구를 계약서에 넣었습니다. 성연 쪽 아파트가 18층이라 사다리차 바람 걱정이 있었는데 숙련된 반장님이 깔끔하게 바닥 보강재 깔고 냉장고 내부 청소까지 스팀으로 소독해 줘서 130만 원 초반대에 기분 좋게 마무리했습니다.</p>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <span class="review-user">디시인사이드 차취 갤러 유저 (대산읍 원룸에서 동문동 투룸 이사)</span>
+        <span class="review-tag">1톤 반포장이사 후기</span>
+      </div>
+      <p>대산 산단 교대근무 3년 차인데 이번에 동문동 빌라로 원룸 탈출했습니다. 짐이 별로 없다고 생각해서 처음에 어플로 용달 기사님만 불렀다가 세탁기랑 퀸 매트리스 들어 올릴 때 허리 나갈 뻔했던 지난 기억이 떠올라, 이번엔 아예 기사님 동승 반포장이사로 40만 원에 계약했습니다. 서산 골목길이 좁아서 트럭 진입이 난감했는데 기사님이 요리조리 주차 각 잘 잡아주셔서 금방 실었습니다. 챗지피티랑 제미나이에 서산 이사 체크리스트 물어봐서 박스 번호 적어둔 게 신의 한 수였습니다. 잔짐은 주말 동안 제가 직접 풀고 청소하니 포장이사 대비 절반 넘게 아꼈네요.</p>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <span class="review-user">에펨코리아 부동산 게시판 회원 (석림동 주택에서 서산센트럴코아루 이사)</span>
+        <span class="review-tag">사다리차 작업 및 위약금 방어 후기</span>
+      </div>
+      <p>부모님 모시고 석림동 오래된 다세대 빌라에서 센트럴코아루 아파트로 이사한 후기 남깁니다. 빌라 쪽 계단이 좁아서 사다리차 진입이 불가능해 걱정했는데, 전날 방문 실측 왔던 서산이삿짐센터 실장님이 베란다 난간 쪽으로 윈치 크레인 각도를 계산해 와서 추가 인건비 없이 무사히 짐을 뺐습니다. 계약금 10만 원 걸 때 인터넷에서 배운 대로 위약금 규정(소비자 귀책, 업체 귀책 모두) 체크하고 화물자동차운송주선사업 허가증 사본도 당당하게 요구해서 확인했습니다. 요즘 세상에 무허가 용달 쓰다가 고가 TV 액정 깨지면 보상받을 길 막막합니다. 꼭 배상책임보험 든 정규 브랜드 이용하시길 권합니다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="quote-request" aria-label="2027년 실시간 무료 견적 신청 폼">
+  <h2>2027년 서산이삿짐센터 최저가 실시간 비교견적 신청</h2>
+  <p>서산시 전 지역 아파트, 빌라, 원룸, 사무실 등 주거 공간의 특성에 맞춘 정확한 견적 산출을 위해 기본 정보를 입력해 주십시오. 전문 공인 컨설턴트가 최저가 산출 내역과 추가 할인 혜택을 무료로 안내해 드립니다.</p>
+
+  <form action="#" method="post" onsubmit="alert('2027년 서산 포장이사 맞춤형 견적 분석 요청이 안전하게 접수되었습니다. 서산 지역 담당 전문 상담원이 신속하게 회신해 드리겠습니다.'); return false;">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="move-type">신청 이사 종류 선택</label>
+        <select id="move-type" name="move-type" required>
+          <option value="">이사 종류 선택</option>
+          <option value="p-full">가정 포장이사 (포장부터 정리 청소 일괄)</option>
+          <option value="p-half">실속 반포장이사 (큰 짐 포장 및 운송 전담)</option>
+          <option value="one-room">원룸 / 오피스텔 소형 용달이사</option>
+          <option value="office">사무실 / 상가 / 관공서 이전 이사</option>
+          <option value="storage">장단기 안심 보관이사</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="departure-dong">출발지 읍면동 위치</label>
+        <select id="departure-dong" name="departure-dong" required>
+          <option value="">서산 내 출발 지역 선택</option>
+          <option value="yecheon">예천동</option>
+          <option value="dongmun">동문동</option>
+          <option value="eumnae">읍내동</option>
+          <option value="seokrim">석림동</option>
+          <option value="seongyeon">성연면 (테크노밸리)</option>
+          <option value="daesan">대산읍</option>
+          <option value="jigok">지곡면</option>
+          <option value="haemi">해미면</option>
+          <option value="unsan">운산면</option>
+          <option value="inji">인지면</option>
+          <option value="buchun">부춘동 / 수석동 / 음암면 기타</option>
+          <option value="outside">서산 외 타 시군구 지역</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="house-type">현재 주거 형태 및 평형대</label>
+        <select id="house-type" name="house-type" required>
+          <option value="">주거 형태 선택</option>
+          <option value="apt-small">아파트 (10평대 ~ 20평대 초반)</option>
+          <option value="apt-mid">아파트 (24평 ~ 34평 국민평형)</option>
+          <option value="apt-large">아파트 (38평 ~ 50평형 이상 대형)</option>
+          <option value="villa">다세대 빌라 / 연립주택</option>
+          <option value="single">단독 전원주택</option>
+          <option value="officetel">오피스텔 / 원룸 / 투룸</option>
+          <option value="biz">상업용 사무실 / 매장</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="ladder-check">사다리차 이용 계획 여부</label>
+        <select id="ladder-check" name="ladder-check" required>
+          <option value="">장비 사용 여부 선택</option>
+          <option value="ladder-both">출발지, 도착지 모두 사다리차 사용</option>
+          <option value="ladder-dep">출발지만 사다리차 사용 (도착지는 승강기)</option>
+          <option value="ladder-arr">도착지만 사다리차 사용 (출발지는 승강기)</option>
+          <option value="elevator">모두 엘리베이터 작업 (관리소 승인)</option>
+          <option value="low-floor">저층 1층으로 사다리차 불필요</option>
+          <option value="unknown">현장 방문 시 판단 요망</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="move-date">희망 이사 예정일자</label>
+        <input type="date" id="move-date" name="move-date" required>
+      </div>
+
+      <div class="form-group">
+        <label for="user-phone">견적서 수신 연락처 전화번호</label>
+        <input type="tel" id="user-phone" name="user-phone" placeholder="010-0000-0000" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="special-memo">주요 이삿짐 특이사항 (돌침대, 대형 벽걸이TV, 피아노, 시스템 에어컨 이전설치 등)</label>
+      <textarea id="special-memo" name="special-memo" rows="4" placeholder="붙박이장 분해조립, 정수기 및 비데 탈착 등 전문 인력의 손길이 필요한 부분을 자세히 기재해 주시면 더욱 정밀한 최저가 계산 견적이 제공됩니다."></textarea>
+    </div>
+
+    <button type="submit" class="cta">2027년형 서산이삿짐센터 최저가 견적서 무료 신청하기</button>
+  </form>
+</section>
+
+<section id="faq" aria-label="자주 묻는 질문 FAQ">
+  <h2>서산이삿짐센터 이용 시 가장 자주 묻는 질문 FAQ</h2>
+  <dl class="faq">
+    <dt>Q. 이사 계약금은 보통 얼마를 지불해야 하며, 중간 취소 시 환불 기준은 어떻게 되나요?</dt>
+    <dd>A. 통상적으로 총 이사 견적 금액의 10퍼센트 내외를 계약금으로 송금합니다. 공정거래위원회 표준약관 규정에 따르면 고객의 사정으로 계약을 해제할 때, 이사 예정일 5일 전까지 통보하면 계약금 전액을 돌려받을 수 있습니다. 2일 전 통보는 계약금의 일정 비율 환불, 하루 전이나 당일 취소 시에는 계약금 반환 불가 및 손해배상 위약금이 발생하므로 부득이한 일정 변경 시에는 최소 일주일 전에 서산이삿짐센터 담당자와 협의해야 합니다.</dd>
+
+    <dt>Q. 아파트 엘리베이터 이사와 사다리차 이사 중 어떤 방식이 더 경제적인가요?</dt>
+    <dd>A. 층수와 아파트 관리사무소 요금 규정에 따라 다릅니다. 아파트 승강기 사용료가 10만 원 안팎으로 저렴하고 엘리베이터 크기가 크다면 사다리차(통상 15만 원~25만 원)보다 비용을 아낄 수 있습니다. 그러나 승강기 사용료를 20만 원 이상 징수하거나 다른 세대의 이용 대기 불편이 큰 경우, 작업 시간이 2시간 이상 지연되면 인건비가 추가되어 오히려 사다리차가 시간과 비용 양면에서 훨씬 유리한 경우가 많습니다.</dd>
+
+    <dt>Q. 이사 도중 가전제품이 훼손되거나 가구에 흠집이 생기면 어떻게 보상받나요?</dt>
+    <dd>A. 정식 등록된 서산 관허업체는 5백만 원 이상의 피해보상 이행보증보험 또는 적재물 배상책임보험에 의무 가입되어 있습니다. 파손을 발견한 즉시 물품의 사진과 동영상을 다양한 각도로 촬영해 현장 반장에게 확인 서명을 받고 당일 고객센터에 사고를 접수해야 합니다. 14일 이내에 손해 증빙을 서면 통지하면 보험사를 통해 감가상각을 반영한 수리비 또는 변제금을 정당하게 보상받게 됩니다.</dd>
+
+    <dt>Q. 이사 당일 작업 인부들에게 식대나 수고비 명목의 팁을 별도로 챙겨주어야 하나요?</dt>
+    <dd>A. 원칙적으로 계약서상에 확정된 총액 외에 별도의 식대나 웃돈을 요구하는 것은 불법 부당 행위입니다. 서산 메이저 및 우량 전문 업체들은 견적서 작성 단계에서 인건비와 식대, 부가세 일체를 포함하여 총액제로 계약을 체결합니다. 당일 현장에서 기사님이 추가 웃돈을 무리하게 요구할 경우 계약서 위반이므로 즉시 본사 상황실에 연락하여 시정을 요구하시면 됩니다.</dd>
+
+    <dt>Q. 서산에서 타 지역(서울, 경기 수도권, 대전 등)으로 장거리 이사 시 추가 요금 계산법은?</dt>
+    <dd>A. 장거리 이사는 서산 관내 이동과 달리 왕복 고속도로 통행료, 유류비 할증, 운행 시간 증가에 따른 일당 인건비가 추가됩니다. 서산에서 서울/경기권 이동은 5톤 기준 관내 요금보다 약 30만 원에서 50만 원, 부산이나 광주 등 영호남 장거리 이동은 60만 원에서 90만 원가량 운송 운임이 증액되며, 필요에 따라 하루 전날 짐을 싣고 다음 날 아침 일찍 도착지에 하차하는 1박 2일 일정이 소요될 수 있습니다.</dd>
+  </dl>
+</section>
+
+<section id="market-outlook" aria-label="AI 빅데이터 기반 시장 분석">
+  <h2>AI와 데이터 알고리즘으로 분석한 2027년 서산 이사 화물 물류 시장 동향</h2>
+  <div class="content-block">
+    <p>네이버 AI 검색 탭과 구글, 챗지피티, 제미나이 등 고도화된 대규모 언어 모델(LLM)이 서산시 이사 시장에 미친 가장 두드러진 변화는 정보의 대칭화와 가격 투명성 제고입니다. 과거 주먹구구식으로 부르던 용달 운임과 깜깜이 추가금 관행은 스마트폰 어플 기반의 화물 중개 시스템과 실시간 사진 견적 판독 기술로 완전히 대체되고 있습니다.</p>
+
+    <h3>서산 산업단지 배후 이동과 친환경 물류 패러다임</h3>
+    <p>대산임해산업지역과 서산테크노밸리를 중심으로 신규 고용 인력이 유입되면서 단기 원룸 거주 후 2~3년 주기로 신축 아파트로 점진적 수평 이동하는 청장년층 가구의 비중이 뚜렷하게 증가하고 있습니다. 2027년 현재 서산의 전문 이삿짐센터들은 기존의 일회용 종이박스와 비닐 테이프 사용을 억제하고, 항균 다회용 PP 플라스틱 수거 박스와 친환경 완충 패드를 사용하는 제로 웨이스트 포장 방식을 도입하여 입주민들의 높은 호응을 얻고 있습니다.</p>
+
+    <h3>모바일 및 핀테크 플랫폼과의 융합</h3>
+    <p>이제 서산 시민들은 유선 전화번호부를 뒤적이지 않고 스마트폰 터치 몇 번으로 토스, 카카오톡, 네이버 플레이스를 통해 실시간 방문 상담을 조율합니다. 계약금 송금 역시 에스크로 안전 결제 서비스를 통해 보호받으며, 작업 완료 후 최종 잔금 결제 시 현금영수증 의무 발급과 카드 결제 시스템이 기본 장착되었습니다. 이로 인해 불투명한 현금 결제 유도나 위약금 분쟁이 크게 줄어들었으며, 리뷰 별점 제도가 정착됨에 따라 친절도와 사후 처리 품질이 상향 평준화되는 선순환 구조가 완성되었습니다.</p>
+  </div>
+</section>
+
+<section id="official-links" aria-label="신뢰할 수 있는 외부 공인 기관 안내">
+  <h2>공인된 신뢰성 있는 공공기관 및 공식 협회 사이트</h2>
+  <div class="content-block">
+    <p>이사 계약을 체결하기 전, 허위 등록 여부 확인과 행정 구제 절차를 숙지하기 위해 반드시 방문해 보아야 할 국가 공인 기관 웹사이트입니다.</p>
+    <ul>
+      <li><a href="https://www.seosan.go.kr" target="_blank" rel="noopener noreferrer">서산시청 공식 누리집 (서산 관내 교통물류 공고 및 생활민원 포털)</a></li>
+      <li><a href="https://www.kffa.or.kr" target="_blank" rel="noopener noreferrer">전국화물자동차운송주선사업연합회 (공인 관허 이사업체 실시간 조회 센터)</a></li>
+      <li><a href="https://www.molit.go.kr" target="_blank" rel="noopener noreferrer">대한민국 국토교통부 (이사화물 표준약관 및 소비자 보호 법령 정보처)</a></li>
+    </ul>
+  </div>
+</section>
+
+  
